@@ -17,7 +17,7 @@
         <script>
             function checkDelete(id) {
                 if (confirm('Are you sure you want to delete?')) {
-                    urlDel = "CRUD_PAA/deleteRecord.php?id=" + id;
+                    urlDel = "CRUD_PEC/deleteRecord.php?id=" + id;
                     location.href = urlDel;
                 }
             }
@@ -27,7 +27,7 @@
         <button onclick="popup()">New</button>
         <div class="center" style="display: none">
             <button onclick="closePopup()" style="float: right">X</button>
-            <form method="post" action="CRUD_PAA/addRecord.php">
+            <form method="post" action="CRUD_PEC/addRecord.php">
                 <fieldset>
                     Référence:<br>
                     <label>
@@ -43,10 +43,19 @@
                     <label>
                         <input type="text" name="obj">
                     </label>
-
                     <br> Date Limite de Réponse:<br>
                     <label>
                         <input type="datetime-local" name="limit">
+                    </label>
+                    <br>
+                    Caution:<br>
+                    <label>
+                        <input type="text" name="caution">
+                    </label>
+                    <br>
+                    Délai d'exécution:<br>
+                    <label>
+                        <input type="text" name="execDelay">
                     </label>
                     <br>
                     Prospectus:<br>
@@ -77,6 +86,8 @@
                         <th>Réference MODCOD</th>
                         <th>Objet</th>
                         <th>Date limite de réponse</th>
+                        <th>Caution</th>
+                        <th>Délai d'exécution</th>
                         <th>Prospectus</th>
                         <th>Éditeur</th>
                         <th>Contexte</th>
@@ -86,7 +97,7 @@
                 <tbody>
                     <?php
                     include_once 'dbConnect.php';
-                    $stmt = 'SELECT * FROM paa';
+                    $stmt = 'SELECT * FROM pec';
                     $res = $conn->query($stmt);
                     while($row = $res->fetch_assoc()){
                         echo "<tr>";
@@ -94,10 +105,12 @@
                         echo "<td>" . $row['refM'] . "</td>";
                         echo "<td>" . $row['obj'] . "</td>";
                         echo "<td>" . $row['dateLimit'] . "</td>";
+                        echo "<td>" . $row['caution'] . "</td>";
+                        echo "<td>" . $row['execDelay'] . "</td>";
                         echo "<td>" . $row['prosp'] . "</td>";
                         echo "<td>" . $row['edit'] . "</td>";
                         echo "<td>" . $row['context'] . "</td>";
-                        echo "<td><a href='CRUD_PAA/updateRecord.php?id=".$row['id']."'>Edit</a> 
+                        echo "<td><a href='CRUD_PEC/updateRecord.php?id=".$row['id']."'>Edit</a> 
                         <a onclick='checkDelete(".$row['id'].")'>Delete</a></td>";
                         echo "</tr>";
                     }
